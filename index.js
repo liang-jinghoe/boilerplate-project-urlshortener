@@ -26,8 +26,9 @@ const short_urls = [];
 
 app.post('/api/shorturl', function(req, res) {
   const { url } = req.body;
+  const domainName = url.replace(/^https?\:\/\//, "");
 
-  dns.lookup(url, function(err, address, family) {
+  dns.lookup(domainName, function(err, address, family) {
     if (err)
       return res.send({ error: 'invalid url' });
 
